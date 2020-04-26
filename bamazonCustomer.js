@@ -37,3 +37,15 @@ var restartPrompt = {
   choices: ["Yes", "No"],
   name: "restart_prompt"
 };
+
+// displays all inventory when first running application
+var displayInventory = function(){
+  connection.query("SELECT * FROM products", function(err,res){
+    console.log("DISPLAYING ALL INVENTORY:" + "\n" + "----------------------------");
+    for (var i = 0; i < res.length; i++) {
+      console.log("Item ID: " + res[i].item_id + "\n" + "Product Name: " + res[i].product_name + "\n" + "Price: " + res[i].price + "\n" + "Available Quantity: " + res[i].stock_quantity + "\n----------------------------");
+    }
+    // then prompts users with which products they would like to buy
+    promptCustomer(res);
+  })
+}
