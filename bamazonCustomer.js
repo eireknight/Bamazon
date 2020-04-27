@@ -55,10 +55,10 @@ var promptCustomer = function(res){
             var newQuantity = res[id].stock_quantity - chosenQuantity;
             var totalCost = res[id].price * chosenQuantity;
             var sql = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
-            var values = ['product_name', 'stock_quantity', newQuantity, 'item_id', chosenProductID];
+            var values = ['inventory', 'stock_quantity', newQuantity, 'item_id', chosenProductID];
             connection.query(sql, values, function(err, res){
               if(err) {
-                throw err,
+                console.log(err),
                 connection.end();
               }
               console.log("Product(s) bought!" + "\n" + "Total Cost of Transaction: $" + totalCost);
